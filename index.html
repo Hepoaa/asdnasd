@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sé que eres tú - Una historia de amor personal">
+    <title>Sé que eres tú</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Background Music -->
+    <audio id="background-music" loop preload="auto">
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-book">
+                <div class="loading-cover"></div>
+                <div class="loading-page"></div>
+                <div class="loading-page"></div>
+                <div class="loading-page"></div>
+            </div>
+            <p class="loading-text">Abriendo nuestra historia...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="welcome-screen hidden">
+        <div class="welcome-content">
+            <div class="welcome-decoration top"></div>
+            <h1 class="welcome-title">Sé que eres tú</h1>
+            <p class="welcome-subtitle">Nuestra historia de amor</p>
+            <div class="welcome-ornament">❦</div>
+            <button id="start-quiz-btn" class="open-book-btn">
+                <span>Comenzar</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+            </button>
+            <div class="welcome-decoration bottom"></div>
+        </div>
+        <div class="welcome-petals"></div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="quiz-screen hidden">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <div class="quiz-hearts">💕</div>
+                <h1 class="quiz-title">¿Cuánto me conoces?</h1>
+                <p class="quiz-subtitle">Demuéstrame que eres mi persona</p>
+            </div>
+
+            <div id="quiz-card" class="quiz-card">
+                <div class="quiz-progress">
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <span id="progress-text" class="progress-text">1 / 10</span>
+                </div>
+
+                <h2 id="question-text" class="question-text">Cargando...</h2>
+
+                <div id="quiz-options" class="quiz-options"></div>
+            </div>
+
+            <!-- Quiz Result -->
+            <div id="quiz-result" class="quiz-result hidden">
+                <div class="result-icon">
+                    <span id="result-emoji">💖</span>
+                </div>
+                <h2 id="result-title" class="result-title">¡Increíble!</h2>
+                <div class="result-score">
+                    <span id="score-number">10</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p id="result-message" class="result-message">¡Me conoces perfectamente!</p>
+                <div class="result-buttons">
+                    <button id="retry-quiz-btn" class="quiz-btn secondary">
+                        <span>🔄</span> Intentar de nuevo
+                    </button>
+                    <button id="continue-to-book-btn" class="quiz-btn primary">
+                        <span>📖</span> Ver mi regalo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-floating-hearts" id="quiz-hearts"></div>
+    </div>
+
+    <!-- Main Book Container -->
+    <div id="book-container" class="book-container hidden">
+        <!-- Ambient Background -->
+        <div class="ambient-bg">
+            <div class="table-surface"></div>
+            <div class="ambient-candle">
+                <div class="candle-body"></div>
+                <div class="candle-flame"></div>
+                <div class="candle-glow"></div>
+            </div>
+            <div class="ambient-roses"></div>
+            <div class="floating-petals" id="floating-petals"></div>
+        </div>
+
+        <!-- Media Gallery Panel (Left Side) -->
+        <div id="media-gallery" class="media-gallery">
+            <div class="gallery-frame">
+                <video id="gallery-video" class="gallery-media" muted playsinline>
+                    <source src="assets/WhatsApp Video 2026-01-31 at 12.56.58 AM.mp4" type="video/mp4">
+                </video>
+                <img id="gallery-image" class="gallery-media hidden" alt="Nuestros recuerdos">
+            </div>
+            <div class="gallery-controls">
+                <button id="gallery-prev" class="gallery-btn" aria-label="Anterior">❮</button>
+                <div class="gallery-dots" id="gallery-dots"></div>
+                <button id="gallery-next" class="gallery-btn" aria-label="Siguiente">❯</button>
+            </div>
+        </div>
+
+        <!-- Book -->
+        <div id="book" class="book">
+            <!-- Book Spine -->
+            <div class="book-spine">
+                <div class="spine-text">Sé que eres tú</div>
+                <div class="spine-decoration"></div>
+            </div>
+
+            <!-- Bookmark Ribbon -->
+            <div id="bookmark" class="bookmark">
+                <div class="bookmark-ribbon"></div>
+            </div>
+
+            <!-- Pages Container -->
+            <div id="pages-container" class="pages-container">
+                <!-- Pages will be dynamically generated -->
+            </div>
+
+            <!-- Book Shadow -->
+            <div class="book-shadow"></div>
+        </div>
+
+        <!-- UI Controls -->
+        <div class="ui-controls">
+            <!-- Page Indicator -->
+            <div id="page-indicator" class="page-indicator">
+                Capítulo <span id="current-page">1</span> de <span id="total-pages">20</span>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button id="btn-index" class="control-btn" title="Índice" aria-label="Abrir índice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
+                <button id="btn-reading-mode" class="control-btn" title="Modo lectura"
+                    aria-label="Activar modo lectura">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="4" />
+                    </svg>
+                </button>
+                <button id="btn-night-mode" class="control-btn" title="Modo nocturno"
+                    aria-label="Activar modo nocturno">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                </button>
+                <button id="btn-autoplay" class="control-btn" title="Reproducción automática"
+                    aria-label="Iniciar reproducción automática">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5,3 19,12 5,21" />
+                    </svg>
+                </button>
+                <button id="btn-sound" class="control-btn active" title="Música" aria-label="Control de música">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="11,5 6,9 2,9 2,15 6,15 11,19" />
+                        <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Arrows -->
+        <button id="nav-prev" class="nav-arrow nav-prev" aria-label="Página anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15,18 9,12 15,6" />
+            </svg>
+        </button>
+        <button id="nav-next" class="nav-arrow nav-next" aria-label="Página siguiente">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9,18 15,12 9,6" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Index Modal -->
+    <div id="index-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content index-content">
+            <button class="modal-close" aria-label="Cerrar índice">&times;</button>
+            <h2 class="modal-title">Índice</h2>
+            <div id="index-grid" class="index-grid">
+                <!-- Thumbnails will be generated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Zoom Modal -->
+    <div id="zoom-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="zoom-content">
+            <button class="modal-close" aria-label="Cerrar zoom">&times;</button>
+            <img id="zoom-image" src="" alt="Ilustración ampliada">
+        </div>
+    </div>
+
+    <!-- Autoplay Speed Control -->
+    <div id="autoplay-controls" class="autoplay-controls hidden">
+        <label for="autoplay-speed">Velocidad:</label>
+        <input type="range" id="autoplay-speed" min="2" max="10" value="5">
+        <span id="speed-value">5s</span>
+    </div>
+
+    <script src="audio.js"></script>
+    <script src="book-engine.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
