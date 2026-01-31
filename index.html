@@ -15,10 +15,12 @@
 </head>
 
 <body>
-    <!-- Background Music -->
-    <audio id="background-music" loop preload="auto">
-        <source src="assets/music.mp3" type="audio/mpeg">
-    </audio>
+    <!-- YouTube Music Player (Hidden in corner) -->
+    <div id="youtube-player" class="youtube-player hidden">
+        <iframe id="yt-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+        <button id="close-yt" class="close-yt-btn" title="Cerrar música">✕</button>
+    </div>
 
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
